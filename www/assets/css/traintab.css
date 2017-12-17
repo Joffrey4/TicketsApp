@@ -1,0 +1,309 @@
+.train-content {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+}
+
+/* Single-trip Round-trip */
+
+.center-button-roundtrip {
+    width: 300px;
+    border: 1px solid #FFFFFF;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+
+/* Origin and destination */
+
+.od-container {
+    position: relative;
+    width: 310px;
+    height: 100px;
+    margin: 0 auto;
+    color: #FFFFFF;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.od-button {
+    float: left;
+    width: calc(50% - 15px);
+    height: 100px;
+    position: relative;
+}
+
+.od-button-switch {
+    float: left;
+    width: 30px;
+    margin-top: 60px;
+}
+
+.od-header{
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+.od-bigLetters {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-top: -2px;
+}
+
+.od-gare {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: -10px;
+}
+
+.od-switch {
+    width: 19px;
+    height: 19px;
+    margin: 0 auto;
+    background: #000E3D url('../img/icons/double-arrow.svg') no-repeat center center;
+    border: 1px solid #95989A;
+    border-radius: 5px;
+}
+
+.od-ripple {
+    width: calc(50% - 15px);
+}
+
+/* Options box */
+
+.ob-container {
+    position: relative;
+    width: 305px;
+    height: 167px;
+    margin: 0 auto;
+    border-radius: 5px;
+    background-color: #F3F3F3;
+    color: #04123F;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.ob-subcontainer {
+    position: relative;
+    z-index: 2;
+    margin: 0 12px 0;
+    height: 100%;
+}
+
+.ob-hidden {
+    display: none;
+    justify-content: center !important;
+}
+
+.ob-date-container {
+    width: 100%;
+    height: 50%;
+    border-bottom: 1px solid #04123F;
+}
+
+.ob-date-dr-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    font-weight: 600;
+    padding-top: 5px;
+    color: #364165;
+}
+
+.ob-date-dr {
+    width: calc(50% - (45px / 4) - 10px);
+    text-align: center;
+}
+
+.ob-date-calendar-container {
+    margin: 0 auto;
+    width: fit-content;
+    display: flex;
+}
+
+div.ob-date-calendar-container div:nth-child(1) {
+    margin-right: 10px;
+}
+
+div.ob-date-calendar-container div:nth-child(3) {
+    margin-left: 10px;
+}
+
+.ob-date-calendar-date{
+    text-align: center;
+}
+
+.ob-date-calendar-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #04123F url('../img/icons/calendar.svg') no-repeat center center;
+}
+
+.ob-date-calendar-date-day {
+    font-size: 30px;
+    line-height: 30px;
+    font-weight: 700;
+    margin: 0 !important;
+}
+
+.ob-date-calendar-date-week {
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: -2px;
+}
+
+
+.ob-pc-container {
+    width: 100%;
+    height: calc(50% - 18px);
+    margin-top: 6px;
+    display: flex;
+}
+
+.ob-passenger-container {
+    width: 50%;
+    height: 100%;
+    border-right: 1px solid #04123F;
+}
+
+.ob-passenger-title, .ob-clazs-title {
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    color: #364165;
+}
+
+.ob-passenger-subcontainer {
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.ob-passenger-icon {
+    display: inline-block;
+    width: 28px;
+    height: 26px;
+    background: url('../img/icons/users.svg') no-repeat center center;
+}
+
+.ob-passenger-amount {
+    display: inline-block;
+    font-size: 40px;
+    font-weight: 700;
+    margin-left: 6px;
+}
+
+.ob-clazs-container {
+    width: 50%;
+    height: 100%;
+}
+
+.ob-clazs-subcontainer{
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    margin: 3px auto 0;
+}
+
+.ob-clazs-icon {
+    font-size: 30px;
+    color: #FFFFFF;
+    font-weight: 700;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #04123F;
+    text-align: center;
+    line-height: 37px;
+}
+
+.ob-clazs-text-container {
+    margin-left: 4px;
+    font-weight: 700;
+}
+
+.ob-clazs-text-apo {
+    margin-bottom: -2px;
+    font-size: 15px;
+}
+
+.ob-clazs-text-class {
+    font-size: 20px;
+}
+
+/* Search button */
+
+.search-container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    margin: 0 auto;
+    width: 116px;
+    height: 116px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.search-circle-1 {
+    display: flex;
+    margin: auto;
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.search-circle-2 {
+    display: flex;
+    margin: auto;
+    width: 79px;
+    height: 79px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.search-circle-button {
+    margin: auto;
+    width: 69px;
+    height: 69px;
+    border-radius: 50%;
+    background: #041447 url('../img/icons/arrows.svg') no-repeat center center;
+}
+
+/* Station selector */
+
+.ss-result-container {
+    position: relative;
+    margin-top: 70px;
+    visibility: hidden;
+}
+
+#station-search-result {
+    visibility: hidden;
+}
+
+#station-search-input {
+    border: 0;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 15px;
+
+    /* Put the cursor color to red and set back the text color to black*/
+    color: #041447;
+    text-shadow: 0 0 0 #000;
+    -webkit-text-fill-color: transparent;
+}
+
+input::-webkit-input-placeholder {
+    text-shadow: none;
+    -webkit-text-fill-color: initial;
+}

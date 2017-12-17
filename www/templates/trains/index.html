@@ -1,0 +1,91 @@
+<ons-page id="train-index">
+    <div class="main-content train-content">
+
+        <!-- Single-trip Round-trip -->
+        <div class="center-button-roundtrip">
+            <ons-segment-app id="segment" style="width: 300px; margin: 0 auto;">
+                <button id="button-single-trip">Aller simple</button>
+                <button id="button-round-trip">Aller-retour</button>
+            </ons-segment-app>
+        </div>
+
+        <!-- Origin and destination -->
+        <div class="od-container">
+            <div class="od-button" id="od-button-origin">
+                <ons-ripple color="rgba(255,255,255,0.1)" background="rgba(255,255,255,0)" style="width: 100%;">
+                    <div class="od-header">De</div>
+                    <div class="od-bigLetters" id="origin-bigLetters">Mons</div>
+                    <div class="od-gare" id="origin-gare">Mons</div>
+                </ons-ripple>
+            </div>
+            <div class="od-button-switch" id="od-button-switch">
+                <div class="od-switch">
+                    <ons-ripple color="rgb(255,255,255)" background="rgb(255,255,255)" style="width: 100%; border-radius: 5px;"></ons-ripple>
+                </div>
+            </div>
+            <div class="od-button" id="od-button-destination">
+                <ons-ripple color="rgba(255,255,255,0.1)" background="rgba(255,255,255,0)" style="width: 100%;">
+                    <div class="od-header">A</div>
+                    <div class="od-bigLetters" id="destination-bigLetters">Brux</div>
+                    <div class="od-gare" id="destination-gare">Bruxelles-Midi</div>
+                </ons-ripple>
+            </div>
+        </div>
+
+        <!-- Options box -->
+        <div class="ob-container">
+            <ons-ripple color="rgba(191,191,191,0.4)" background="rgba(255,255,255,0)" style="width: 100%; border-radius: 5px;">
+                <div class="ob-subcontainer">
+                    <div class="ob-date-container">
+                        <div class="ob-date-dr-container ob-hidden" id="ob-date-dr-container">
+                            <div class="ob-date-dr">Départ</div>
+                            <div class="ob-date-dr ob-hidden" id="od-date-return">Retour</div>
+                        </div>
+                        <div class="ob-date-calendar-container">
+                            <div>
+                                <div class="ob-date-calendar-date-day">28 nov.</div>
+                                <div class="ob-date-calendar-date-week">mardi</div>
+                            </div>
+                            <div class="ob-date-calendar-icon"></div>
+                            <div class="ob-hidden" id="ob-date-second">
+                                <div class="ob-date-calendar-date-day">28 nov.</div>
+                                <div class="ob-date-calendar-date-week">mardi</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ob-pc-container">
+                        <div class="ob-passenger-container">
+                            <div class="ob-passenger-title">Passagers</div>
+                            <div class="ob-passenger-subcontainer">
+                                <div class="ob-passenger-icon"></div>
+                                <div class="ob-passenger-amount">1</div>
+                            </div>
+                        </div>
+                        <div class="ob-clazs-container">
+                            <div class="ob-clazs-title">Type de billet</div>
+                            <div class="ob-clazs-subcontainer">
+                                <div class="ob-clazs-icon">2</div>
+                                <div class="ob-clazs-text-container">
+                                    <div class="ob-clazs-text-apo">ème</div>
+                                    <div class="ob-clazs-text-class">Classe</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ons-ripple>
+        </div>
+
+        <!-- Search button -->
+        <div class="search-container">
+            <div class="search-circle-1">
+                <div class="search-circle-2">
+                    <div class="search-circle-button">
+                        <ons-ripple color="rgba(191,191,191,0.4)" background="rgba(255,255,255,0)" style="width: 100%; border-radius: 50%;"></ons-ripple>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</ons-page>

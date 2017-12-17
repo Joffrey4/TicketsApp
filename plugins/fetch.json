@@ -6,5 +6,21 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "cordova-custom-config": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-custom-config"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-proguard": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-proguard"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }
