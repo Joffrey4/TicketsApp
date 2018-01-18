@@ -6,8 +6,12 @@ const STATIONS = JSON.parse(fs.readFileSync('./stations.json', 'utf8'));
 
 function generateArray() {
 
-    var stationsListJSON = [];
-    var stationsJSON = {};
+    var data = {
+        stationsListJSON: [],
+        stationsListST: [],
+        stationsListSTArray: {},
+        stationsJSON: {}
+    };
 
     // Loop thought each station of the JSON
     STATIONS.forEach(function (station) {
@@ -17,33 +21,35 @@ function generateArray() {
 
             // Use the alternatives when both are available
             if (station["alternative-fr"] !== "" && station["alternative-nl"] !== "") {
-                result = updateStationJsonAndList(stationsJSON, stationsListJSON, station, "alternative-fr");
-                result = updateStationJsonAndList(result.stationsJSON, result.stationsListJSON, station, "alternative-nl");
+                result = updateStationJsonAndList(data, station, "alternative-fr");
+                result = updateStationJsonAndList(result, station, "alternative-nl");
 
             // Otherwise, use the name and the available alternative
             } else {
-                result = updateStationJsonAndList(stationsJSON, stationsListJSON, station, "name");
+                result = updateStationJsonAndList(data, station, "name");
                 if (station["alternative-fr"] !== "") {
-                    result = updateStationJsonAndList(result.stationsJSON, result.stationsListJSON, station, "alternative-fr");
+                    result = updateStationJsonAndList(result, station, "alternative-fr");
                 } else if (station["alternative-nl"] !== "") {
-                    result = updateStationJsonAndList(result.stationsJSON, result.stationsListJSON, station, "alternative-nl");
+                    result = updateStationJsonAndList(result, station, "alternative-nl");
                 }
             }
 
             // Add the deutsch and english language when available
             if (station["alternative-de"] !== "") {
-                result = updateStationJsonAndList(result.stationsJSON, result.stationsListJSON, station, "alternative-de");
+                result = updateStationJsonAndListEnDe(station, "alternative-de", result)
             }
             if (station["alternative-en"] !== "") {
-                result = updateStationJsonAndList(result.stationsJSON, result.stationsListJSON, station, "alternative-en");
+                result = updateStationJsonAndListEnDe(station, "alternative-en", result)
             }
 
-            stationsJSON = result.stationsJSON;
-            stationsListJSON = result.stationsListJSON;
+            data.stationsJSON = result.stationsJSON;
+            data.stationsListJSON = result.stationsListJSON;
+            data.stationsListST = result.stationsListST;
+            data.stationsListSTArray = result.stationsListSTArray;
         }
     });
 
-    fs.writeFile(path.join(__dirname, "generated/stationsData.json.js"), JSON.stringify(stationsJSON), function(err) {
+    fs.writeFile(path.join(__dirname, "generated/stationsData.json.js"), "var stationData = " + JSON.stringify(data.stationsJSON), function(err) {
         if(err) {
             return console.log(err);
         } else {
@@ -51,7 +57,19 @@ function generateArray() {
         }
     });
 
-    fs.writeFile(path.join(__dirname, "generated/stationsList.json.js"), JSON.stringify(stationsListJSON), function(err) {
+    // Generate a list of the stations
+    data.stationsListST = data.stationsListST.sort(function(a, b){return b-a});
+    var stationsListJSON = [];
+
+    data.stationsListST.forEach(function (number) {
+        data.stationsListSTArray[number].forEach(function (station) {
+            if ((isInArray(station, data.stationsListJSON)) && (!isInArray(station, stationsListJSON))) {
+                stationsListJSON.push(station)
+            }
+        })
+    });
+
+    fs.writeFile(path.join(__dirname, "generated/stationsList.json.js"), "var stationList = " + JSON.stringify(stationsListJSON) + ";", function(err) {
         if(err) {
             return console.log(err);
         } else {
@@ -62,9 +80,9 @@ function generateArray() {
 
     // Generate a list of the internal name
     var internalNames = [];
-    stationsListJSON.forEach(function (station) {
-        if (!isInArray(stationsJSON[station]['id'], internalNames)) {
-            internalNames.push(stationsJSON[station]['id'])
+    data.stationsListJSON.forEach(function (station) {
+        if (!isInArray(data.stationsJSON[station]['id'], internalNames)) {
+            internalNames.push(data.stationsJSON[station]['id'])
         }
     });
 
@@ -77,19 +95,67 @@ function generateArray() {
     });
 }
 
-function updateStationJsonAndList(stationsJSON, stationsListJSON, station, name) {
-    stationsJSON[removeDiacritics(station[name])] = createEntry(station, name);
-    stationsListJSON.push(removeDiacritics(station[name]));
+function updateStationJsonAndList(data, station, name) {
+    data.stationsJSON[removeDiacritics(station[name])] = createEntry(station, station[name]);
+    data.stationsListJSON.push(removeDiacritics(station[name]));
+    data = updateStationListSTHandler(data, station, station[name], name);
     return {
-        stationsJSON: stationsJSON,
-        stationsListJSON: stationsListJSON
+        stationsJSON: data.stationsJSON,
+        stationsListJSON: data.stationsListJSON,
+        stationsListST: data.stationsListST,
+        stationsListSTArray: data.stationsListSTArray
     }
+}
 
+function updateStationJsonAndListEnDe(station, name, result) {
+    var divideResult = divideOnSlash(station[name]);
+    if (divideResult !== station[name]) {
+        result = updateStationJsonAndListConditional(result, station, divideResult.firstStation, name);
+        result = updateStationJsonAndListConditional(result, station, divideResult.secondStation, name);
+    } else {
+        result = updateStationJsonAndList(result, station, name);
+    }
+    return result
+}
+
+function updateStationJsonAndListConditional(data, station, name, nameOrigin) {
+    if (!isInArray(name, data.stationsListJSON)) {
+        data.stationsJSON[removeDiacritics(name)] = createEntry(station, name);
+        data.stationsListJSON.push(removeDiacritics(name));
+        data = updateStationListSTHandler(data, station, name, nameOrigin);
+    }
+    return {
+        stationsJSON: data.stationsJSON,
+        stationsListJSON: data.stationsListJSON,
+        stationsListST: data.stationsListST,
+        stationsListSTArray: data.stationsListSTArray
+    }
+}
+
+function updateStationListSTHandler(data, station, name, nameOrigin) {
+    if (nameOrigin === "alternative-de" || nameOrigin === "alternative-en") {
+        data = updateStationListST(data, 10, name)
+    } else {
+        data = updateStationListST(data, station["avg_stop_times"], name)
+    }
+    return data
+}
+
+function updateStationListST(data, stopTime, name) {
+    if (!isInArray(stopTime,  data.stationsListST)) {
+        data.stationsListST.push(stopTime);
+    }
+    if (data.stationsListSTArray.hasOwnProperty(stopTime)) {
+        data.stationsListSTArray[stopTime].push(removeDiacritics(name))
+    } else {
+        data.stationsListSTArray[stopTime] = [removeDiacritics(name)];
+    }
+    return data;
 }
 
 function createEntry(station, name) {
     return {
-        "bigletter": capitalizeFirstLetter(removeDiacritics(removePrefixSuffix(station[name]).substring(0, 4))),
+        "bigletter": capitalizeFirstLetter(removeDiacritics(removePrefixSuffix(name).substring(0, 4))),
         "id": createInternalName(station)
     }
 }
@@ -242,8 +308,17 @@ function isInArray(value, array) {
     return array.indexOf(value) > -1;
 }
 
-function printEnglish(string) {
-
+function divideOnSlash(string) {
+    var position = string.indexOf("/");
+    if (position !== -1) {
+        var length = string.length;
+        return {
+            firstStation: string.substring(0, position),
+            secondStation: string.substring(position + 1, length)
+        }
+    } else {
+        return string
+    }
 }
 
 generateArray();

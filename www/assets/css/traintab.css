@@ -27,7 +27,7 @@
 .od-button {
     float: left;
     width: calc(50% - 15px);
-    height: 100px;
+    height: 111px;
     position: relative;
 }
 
@@ -62,7 +62,8 @@
     text-align: center;
     font-size: 18px;
     font-weight: 600;
-    margin-top: -10px;
+    margin-top: -7px;
+    line-height: 18px;
 }
 
 .od-switch {
@@ -126,16 +127,10 @@
 
 .ob-date-calendar-container {
     margin: 0 auto;
-    width: fit-content;
     display: flex;
-}
-
-div.ob-date-calendar-container div:nth-child(1) {
-    margin-right: 10px;
-}
-
-div.ob-date-calendar-container div:nth-child(3) {
-    margin-left: 10px;
+    flex-flow: nowrap;
+    justify-content: space-evenly;
+    width: 60%;
 }
 
 .ob-date-calendar-date{
@@ -150,17 +145,20 @@ div.ob-date-calendar-container div:nth-child(3) {
 }
 
 .ob-date-calendar-date-day {
+    margin: 0 auto;
     font-size: 30px;
     line-height: 30px;
     font-weight: 700;
-    margin: 0 !important;
+    width: fit-content;
+    white-space: nowrap;
 }
 
 .ob-date-calendar-date-week {
     font-size: 15px;
     font-weight: 600;
     text-align: center;
-    margin-top: -2px;
+    margin: -2px auto 0;
+    width: fit-content;
 }
 
 
@@ -306,4 +304,137 @@ div.ob-date-calendar-container div:nth-child(3) {
 input::-webkit-input-placeholder {
     text-shadow: none;
     -webkit-text-fill-color: initial;
+}
+
+/* Date selector */
+#dateSelector-main-content {
+    display: flex;
+    flex-flow: column;
+    background: #FFF;
+}
+
+#dateSelector-main-content .toolbar {
+    flex: 0 1 56px;
+    height: 67px;
+}
+
+.ds-weekdays-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.ds-weekdays-days {
+    float: left;
+    width: calc(100% / 7);
+    text-align: center;
+}
+
+#ds-progress-circle-container {
+    position: relative;
+    background: #FFF;
+    text-align: center;
+    height: 100%;
+}
+
+.ds-progress-circle {
+    margin-top: 150px;
+}
+
+.ds-calendar {
+    font-family: 'Source Sans Pro', sans-serif;
+    width: 100%;
+    background: #FFF;
+    color: #000;
+    margin-top: 56px;
+    position: relative;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    flex: 1 1 auto;
+}
+
+.ds-month-container {
+    margin-top: 20px
+}
+
+.ds-month-text {
+    margin-left: calc((100% / 14) - 10px);
+    font-size: 20px;
+    font-weight: 700;
+    color: #04123F;
+}
+
+.ds-month {
+    width: calc(100% - 20px);
+    margin: 0 auto;
+    overflow: auto;
+}
+
+.ds-cell {
+    float: left;
+    width: calc(100% / 7);
+    padding-top: calc(100% / 7);
+}
+
+.undisplay {
+    display: none;
+}
+
+.ds-day {
+    position: relative;
+    border-radius: 7px;
+    transition: background 100ms ease-in-out;
+    background: #FFF;
+}
+
+.ds-today {
+    background: #04123F;
+    color: white;
+}
+
+.ds-day-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.ds-day-disabled {
+    color: grey;
+}
+
+.ds-validator {
+    position: relative;
+    flex: 1 0 65px;
+    background: #FFF;
+    border-top: 1px solid rgba(0,0,0,.3);
+}
+
+.center-ver {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.ds-validator-button {
+    width: 95%;
+    height: 48px;
+    border-radius: 5px;
+    background: #041447;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.ds-validator-text {
+    color: #FFF;
+    font-size: 25px;
+    font-family: 'Source Sans Pro', sans-serif;
 }

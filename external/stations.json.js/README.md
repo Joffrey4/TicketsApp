@@ -21,5 +21,13 @@ Le nom interne est le résultat d'une normalisation du nom séléctionné, qui s
 ##### Cas d'exceptions:
 - Le nom interne de la gare de "Brussel - Airport Zaventem" est "airport" et non "brussel". Cette règle est gérée automatiquement.
 
-#### Changements notables du fichier station.json:
-- Gare de "Brussel-Zuid/Bruxelles-Midi", le nom anglais est réduit uniquement à "Brussels-South"
+#### Information sur la génération des données de recherches des gares
+Les données de recherches des gares sont deux tableaux de données contenant les gares belges. Chacune des gares y est enregistrée avec son nom principale, celui affiché dans la réalité sur les quai de la gare, et si disponible, ses traduction en français, néerlandais, anglais et allemand.
+
+Ces données sont générées depuis le fichier station.json, et sont utilisées dans l'application sur l'écran de recherche d'une gare.
+
+Elles sont divisées en deux fichiers: Le premier contient uniquement les noms, le second contient les noms, avec pour chacun des noms, le nom interne et un nom raccourci à 4 lettres.
+
+Le premier fichier est utilisé pour la recherche d'une gare. Le second permet, lors de l'affichage des résultats, de faire le lien entre le nom de la gare trouvé et le nom interne qui, par la suite, sera envoyé par l'application vers le serveur pour effectuer une recherche de billet.
+
+##### Ordre d'affichage des gares dans les résultats d'une recherche
