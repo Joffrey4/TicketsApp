@@ -1,5 +1,7 @@
 # TicketsApp
 
+Android app to sell tickets.
+
 # Problems and bugs
 ##### Desactivate Hyper-V
 Intel's Hyper-V technology may avoid the Android emulator to run properly. Disabling it with:
